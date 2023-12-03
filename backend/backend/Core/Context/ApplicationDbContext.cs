@@ -30,6 +30,14 @@ namespace backend.Core.Context
                 .HasOne(candidate => candidate.Job)
                 .WithMany(job => job.Candidates)
                 .HasForeignKey(candidate => candidate.JobId);
+
+            modelBuilder.Entity<Company>()
+                .Property(company => company.Size)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Job>()
+                .Property(job => job.Level)
+                .HasConversion<string>();
         }
     }
 }

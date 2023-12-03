@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+using backend.Core.AutoMapperConfig;
 using backend.Core.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("local"));
+});
+
+// Automapper configuration
+builder.Services.AddAutoMapper(typeof(AutoMapperConfigProfile));
+
+// Json enums to string value
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
 // Add services to the container.
