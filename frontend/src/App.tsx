@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import { ThemeProvider } from './providers/theme-provider';
 
 const Home = lazy(() => import('./pages/home'));
+const Companies = lazy(() => import('./pages/companies'));
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/companies">
+                <Route index element={<Companies />} />
+              </Route>
             </Routes>
           </Suspense>
         </main>
