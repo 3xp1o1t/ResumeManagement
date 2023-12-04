@@ -3,7 +3,6 @@ using backend.Core.Dtos.Candidate;
 using backend.Core.Dtos.Company;
 using backend.Core.Dtos.Job;
 using backend.Core.Entities;
-using Microsoft.Data.SqlClient;
 
 namespace backend.Core.AutoMapperConfig
 {
