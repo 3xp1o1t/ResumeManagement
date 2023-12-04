@@ -4,15 +4,15 @@ import ModeToggle from './mode-toggle';
 
 const Navbar = () => {
   return (
-    <header className="flex flex-wrap items-center mx-auto p-5">
+    <header className="container flex flex-wrap items-center w-full h-14 relative z-30 border-b">
       <h1 className="text-xl font-medium tracking-wider">
         <Link to={'/'}>Resume Management</Link>
       </h1>
       <nav className="flex flex-wrap items-center justify-center mx-auto gap-10">
         {LINKS.map((link) => (
-          <a key={link.label}>
+          <p key={link.label}>
             <Link to={link.href}>{link.label}</Link>
-          </a>
+          </p>
         ))}
       </nav>
       <ModeToggle />
