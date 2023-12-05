@@ -31,7 +31,11 @@ const Index = () => {
           <Skeleton className="ml-auto justify-end rounded-md h-9" />
         </div>
       ) : (
-        <DataTable columns={columns} data={companies} />
+        <DataTable
+          columns={columns}
+          data={companies}
+          addSlug="/companies/add"
+        />
       )}
     </div>
   );

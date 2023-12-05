@@ -1,6 +1,6 @@
 import { ICompany } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown, WrenchIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
@@ -77,20 +77,11 @@ export const columns: ColumnDef<ICompany>[] = [
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button variant={'ghost'} className="h-8 w-8 p-0">
-              <MoreHorizontal className="h-4 w-4" />
+              <WrenchIcon className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(company.name)}
-            >
-              Copy company name
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => redirect('/companies/add')}>
-              Add new company
-            </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
                 redirect(
@@ -99,6 +90,12 @@ export const columns: ColumnDef<ICompany>[] = [
               }
             >
               Update company
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(company.name)}
+            >
+              Copy company name
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

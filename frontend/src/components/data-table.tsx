@@ -19,7 +19,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Plus } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import {
   DropdownMenu,
@@ -32,16 +34,19 @@ import { Input } from './ui/input';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  addSlug: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  addSlug,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+  const redirect = useNavigate();
 
   const table = useReactTable({
     data,
@@ -68,6 +73,14 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <Button
+          variant={'secondary'}
+          className="ml-2"
+          onClick={() => redirect(addSlug)}
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          Add New
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant={'outline'} className="ml-auto">
