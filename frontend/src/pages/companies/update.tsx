@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useToast } from '@/components/ui/use-toast';
 import http from '@/lib/http';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -31,6 +32,7 @@ const formSchema = z.object({
 const UpdateCompany = () => {
   const redirect = useNavigate();
   const { id, name, size } = useParams();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,6 +48,10 @@ const UpdateCompany = () => {
       .put(`/Company/Put/${id}`, values)
       .then((response) => {
         if (response.status === 200) {
+          toast({
+            title: 'Success',
+            description: 'Company updated successfully',
+          });
           redirect('/companies');
         }
       })

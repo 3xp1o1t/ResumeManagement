@@ -42,5 +42,24 @@ namespace backend.Controllers
 
             return Ok(convertedCompanies);
         }
+
+        [HttpPut]
+        [Route("Put/{companyId}")]
+        public async Task<IActionResult> UpdateCompany(long companyId, [FromBody] CompanyUpdateDto dto)
+        {
+            var existingCompany = await _context.Companies.FindAsync(companyId);
+
+            if (existingCompany == null)
+            {
+                return NotFound("Company not found");
+            }
+
+            existingCompany.Name = dto.Name;
+            existingCompany.Size = dto.Size;
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Company updated successfully");
+        }
     }
 }

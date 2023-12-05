@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import { Toaster } from './components/ui/toaster';
 import { ThemeProvider } from './providers/theme-provider';
 
 const Home = lazy(() => import('./pages/home'));
@@ -25,6 +26,7 @@ function App() {
             </Routes>
           </Suspense>
         </main>
+        <Toaster />
       </div>
     </ThemeProvider>
   );
