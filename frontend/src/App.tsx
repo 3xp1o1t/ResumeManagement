@@ -5,6 +5,7 @@ import { ThemeProvider } from './providers/theme-provider';
 
 const Home = lazy(() => import('./pages/home'));
 const Companies = lazy(() => import('./pages/companies'));
+const AddCompany = lazy(() => import('./pages/companies/add'));
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/companies">
                 <Route index element={<Companies />} />
+                <Route path="add" element={<AddCompany />} />
               </Route>
             </Routes>
           </Suspense>

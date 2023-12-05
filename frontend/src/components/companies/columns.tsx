@@ -1,6 +1,7 @@
 import { ICompany } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Checkbox } from '../ui/checkbox';
 import {
@@ -68,6 +69,8 @@ export const columns: ColumnDef<ICompany>[] = [
     id: 'actions',
     header: 'Actions',
     cell: ({ row }) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const redirect = useNavigate();
       const company = row.original;
 
       return (
@@ -85,7 +88,9 @@ export const columns: ColumnDef<ICompany>[] = [
               Copy company name
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View company</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => redirect('/companies/add')}>
+              Add new company
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
