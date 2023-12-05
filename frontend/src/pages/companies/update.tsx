@@ -21,27 +21,29 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import http from '@/lib/http';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Company name is required' }),
   size: z.string(),
 });
-const Add = () => {
+
+const UpdateCompany = () => {
   const redirect = useNavigate();
+  const { id, name, size } = useParams();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: 'shadcn',
-      size: 'Small',
+      name: name,
+      size: size,
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    console.log(id, name, size, values);
     http
-      .post('/Company/Create', values)
+      .put(`/Company/Put/${id}`, values)
       .then((response) => {
         if (response.status === 200) {
           redirect('/companies');
@@ -107,4 +109,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default UpdateCompany;

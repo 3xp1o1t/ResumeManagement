@@ -74,7 +74,7 @@ export const columns: ColumnDef<ICompany>[] = [
       const company = row.original;
 
       return (
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button variant={'ghost'} className="h-8 w-8 p-0">
               <MoreHorizontal className="h-4 w-4" />
@@ -90,6 +90,13 @@ export const columns: ColumnDef<ICompany>[] = [
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => redirect('/companies/add')}>
               Add new company
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                redirect(`${company.id}/${company.name}/${company.size}`)
+              }
+            >
+              Update company
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
