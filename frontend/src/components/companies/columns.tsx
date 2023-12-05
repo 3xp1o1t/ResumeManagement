@@ -1,3 +1,4 @@
+import { DeleteCompany } from '@/api/company';
 import { ICompany } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, WrenchIcon } from 'lucide-react';
@@ -122,7 +123,7 @@ export const columns: ColumnDef<ICompany>[] = [
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-              <Button type="submit">Confirm</Button>
+              <Button onClick={() => DeleteCompany(company.id)}>Confirm</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

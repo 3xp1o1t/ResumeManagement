@@ -61,5 +61,23 @@ namespace backend.Controllers
 
             return Ok("Company updated successfully");
         }
+
+        [HttpPut]
+        [Route("Delete/{companyId}")]
+        public async Task<IActionResult> DeleteCompany(long companyId)
+        {
+            var existingCompany = await _context.Companies.FindAsync(companyId);
+
+            if (existingCompany == null)
+            {
+                return NotFound("Company not found");
+            }
+
+            existingCompany.IsActive = false;
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Company delete successfully");
+        }
     }
 }
