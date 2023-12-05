@@ -6,9 +6,9 @@ import { ThemeProvider } from './providers/theme-provider';
 
 const Home = lazy(() => import('./pages/home'));
 const Companies = lazy(() => import('./pages/companies'));
-const AddCompany = lazy(() => import('./pages/companies/add'));
-const UpdateCompany = lazy(() => import('./pages/companies/update'));
-
+const CreateUpdateCompany = lazy(
+  () => import('./pages/companies/create-update'),
+);
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -20,8 +20,11 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/companies">
                 <Route index element={<Companies />} />
-                <Route path="add" element={<AddCompany />} />
-                <Route path=":id/:name/:size" element={<UpdateCompany />} />
+                <Route path="add" element={<CreateUpdateCompany />} />
+                <Route
+                  path=":id/:name/:size"
+                  element={<CreateUpdateCompany />}
+                />
               </Route>
             </Routes>
           </Suspense>

@@ -4,12 +4,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import http from '@/lib/http';
 import { ICompany } from '@/types';
 import { useEffect, useState } from 'react';
-// import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [companies, setCompanies] = useState<ICompany[]>([]);
   const [loading, setLoading] = useState(false);
-  // const redirect = useNavigate();
 
   useEffect(() => {
     setLoading(true);

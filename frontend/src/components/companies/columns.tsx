@@ -93,7 +93,9 @@ export const columns: ColumnDef<ICompany>[] = [
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
-                redirect(`${company.id}/${company.name}/${company.size}`)
+                redirect(
+                  `/companies/${company.id}/${company.name}/${company.size}`,
+                )
               }
             >
               Update company
