@@ -44,3 +44,18 @@ export const DeleteCompany = (id: string) => {
     })
     .catch((error) => console.log(error));
 };
+
+export const DeleteManyCompanies = (ids: string[]) => {
+  http
+    .put(`/Company/DeleteMany`, ids)
+    .then((response) => {
+      if (response.status === 200) {
+        toast({
+          title: 'Success',
+          description: 'Companies deleted successfully',
+        });
+        window.location.reload();
+      }
+    })
+    .catch((error) => console.log(error));
+};

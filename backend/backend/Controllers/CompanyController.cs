@@ -79,5 +79,26 @@ namespace backend.Controllers
 
             return Ok("Company delete successfully");
         }
+
+        [HttpPut]
+        [Route("DeleteMany")]
+        public async Task<IActionResult> DeleteManyCompanies([FromBody] CompanyDeleteManyDto dto)
+        {
+            if (dto == null || dto.CompanyIds == null || !dto.CompanyIds.Any())
+            {
+                return BadRequest("No companies id's provided for deletection");
+            }
+
+            var companiesToDelete = await _context.Companies.Where(c => dto.CompanyIds.Contains(c.ID)).ToListAsync();
+
+            foreach (var company in companiesToDelete)
+            {
+                company.IsActive = false;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Companies deleted successfully");
+        }
     }
 }

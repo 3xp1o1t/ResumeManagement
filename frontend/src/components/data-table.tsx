@@ -47,6 +47,7 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const redirect = useNavigate();
+  const ids: string[] = [];
 
   const table = useReactTable({
     data,
@@ -60,7 +61,22 @@ export function DataTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     state: { sorting, columnFilters, columnVisibility, rowSelection },
+    enableRowSelection: true,
+    meta: {
+      removeSelectedRows: (selectedRows: number[]) => {
+        selectedRows.forEach((rowIndex) => {
+          ids.push(data[rowIndex].id);
+        });
+      },
+    },
   });
+
+  const removeRows = () => {
+    table.options.meta.removeSelectedRows(
+      table.getSelectedRowModel().rows.map((row) => row.index),
+    );
+    table.resetRowSelection();
+  };
 
   return (
     <div>
@@ -162,6 +178,15 @@ export function DataTable<TData, TValue>({
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getSelectedRowModel().rows.length > 0 ? (
+            <Button
+              variant={'destructive'}
+              onClick={removeRows}
+              className="ml-2"
+            >
+              Remove selected
+            </Button>
+          ) : null}
         </div>
         <Button
           variant={'outline'}
@@ -169,7 +194,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previus
+          Previous
         </Button>
         <Button
           variant={'outline'}
